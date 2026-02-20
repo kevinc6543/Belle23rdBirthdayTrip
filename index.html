@@ -3,469 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>老婆喵專屬：富國島慶生之旅</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Kevin & Belle 專屬：富國島之旅 🌴</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #FF8E8E; /* 浪漫粉紅 */
+            --primary-light: #FFD6D6;
             --secondary-color: #6EB5FF; /* 富國島藍 */
             --accent-color: #FFB347; /* 日落橙 */
-            --bg-color: #FFF5F5;
+            --bg-color: #FFF0F5; /* 淡淡粉紅底色 */
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --time-color: #666666;
+            --text-color: #4A4A4A;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans TC', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
 
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding-bottom: 50px;
-        }
-
-        /* Header Section */
-        header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            padding: 40px 20px 60px;
+        /* =========================================
+           驚喜第一頁 (Landing Page) 樣式
+           ========================================= */
+        #landing-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+            padding: 20px;
             text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3);
-            margin-bottom: -30px;
-        }
-
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Day Card */
-        .day-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
         }
 
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
-        }
-
-        .day-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .day-date {
-            font-size: 0.9rem;
-            color: #999;
-            font-weight: 500;
-        }
-
-        /* Timeline Items */
-        .timeline-item {
-            display: flex;
-            margin-bottom: 18px;
-            position: relative;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .time {
-            min-width: 85px;
-            font-size: 0.85rem;
-            color: var(--time-color);
-            font-weight: 500;
-            padding-top: 2px;
-        }
-
-        .content {
-            padding-left: 15px;
-            border-left: 2px solid #eee;
-            flex: 1;
-            padding-bottom: 5px;
-        }
-
-        .content strong {
-            display: block;
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .content span {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Specific Highlights */
-        .highlight-event .content {
-            border-left: 2px solid var(--accent-color);
-        }
+        .landing-title { font-size: 2rem; color: var(--primary-color); font-weight: 900; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(255, 142, 142, 0.2); }
+        .couple-name { font-size: 1.8rem; color: #D81B60; font-weight: bold; margin: 15px 0; letter-spacing: 2px; }
+        .travel-dates { font-size: 1.1rem; color: #666; font-weight: 500; margin-bottom: 30px; background: white; padding: 5px 15px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         
-        .highlight-event .content strong {
-            color: var(--accent-color);
+        /* 倒數計時器 (Landing Page 用) */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.8);
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            padding: 20px 15px;
+            box-shadow: 0 8px 25px rgba(255, 142, 142, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid white;
+            margin-bottom: 40px;
+            z-index: 10;
         }
+        .countdown-title { font-size: 0.95rem; color: var(--primary-color); font-weight: bold; margin-bottom: 12px; }
+        .countdown-timer { display: flex; justify-content: center; gap: 10px; }
+        .time-box { background: var(--primary-light); color: #D81B60; padding: 8px 10px; border-radius: 12px; min-width: 60px; }
+        .time-box span { display: block; font-size: 1.5rem; font-weight: 900; line-height: 1; margin-bottom: 2px; }
+        .time-box small { font-size: 0.75rem; font-weight: bold; }
 
-        /* Info Box */
-        .info-box {
-            background-color: #F8F9FA;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: #555;
-            border: 1px dashed #ddd;
-        }
-
-        .info-box h4 {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            color: #777;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-box ul {
-            list-style: none;
-            padding-left: 5px;
-        }
-
-        .info-box li {
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Birthday Badge */
-        .birthday-badge {
-            background: linear-gradient(45deg, #FF8E8E, #FFB347);
+        /* 出發按鈕 */
+        .start-btn {
+            background: linear-gradient(45deg, var(--primary-color), #FF6B6B);
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 5px;
-            box-shadow: 0 2px 5px rgba(255, 142, 142, 0.4);
+            border: none;
+            padding: 16px 50px;
+            font-size: 1.4rem;
+            border-radius: 40px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+            transition: transform 0.2s;
+            z-index: 10;
+        }
+        .start-btn:active { transform: scale(0.95); }
+        .prepared-by { font-size: 0.85rem; color: #999; margin-top: 40px; font-weight: 500; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 142, 142, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 142, 142, 0); }
         }
 
-        footer {
+        /* 背景裝飾 */
+        .decor { position: absolute; opacity: 0.1; z-index: 1; font-size: 100px; }
+        .decor-1 { top: -20px; left: -20px; transform: rotate(-15deg); }
+        .decor-2 { bottom: 50px; right: -20px; transform: rotate(15deg); }
+
+        /* =========================================
+           主行程頁面 (Main Itinerary) 樣式
+           ========================================= */
+        #main-itinerary { display: none; padding-bottom: 50px; animation: fadeIn 0.8s ease-in-out; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 內頁 Header */
+        header {
+            background: linear-gradient(135deg, #FFB6C1, var(--primary-color));
+            color: white;
+            padding: 30px 20px 25px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #aaa;
-            margin-top: 40px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 142, 142, 0.3);
         }
+        header h1 { font-size: 1.5rem; margin-bottom: 5px; font-weight: 700; }
+        header p { font-size: 0.9rem; opacity: 0.95; }
 
-        /* Floating Button for Map/Notes (Optional visual element) */
-        .fab {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
+        /* 分頁選單 (Tabs) */
+        .tabs { display: flex; justify-content: center; gap: 8px; margin: 25px auto; padding: 0 15px; max-width: 500px; }
+        .tab-btn { background: white; border: 2px solid var(--primary-light); color: var(--primary-color); padding: 10px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; flex: 1; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .tab-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: scale(1.05); }
+
+        /* 內容區塊 */
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+        .day-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .day-content.active { display: block; }
+
+        /* 卡片設計 */
+        .day-card { background: var(--card-bg); border-radius: 25px; overflow: hidden; box-shadow: 0 8px 20px rgba(255, 142, 142, 0.15); margin-bottom: 25px; }
+        .hero-img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 25px; }
+        .day-header { border-bottom: 2px dashed var(--primary-light); padding-bottom: 15px; margin-bottom: 20px; }
+        .day-title { font-size: 1.3rem; font-weight: 700; color: var(--primary-color); display: block; }
+        .day-subtitle { font-size: 0.85rem; color: #888; margin-top: 5px; display: block; }
+
+        /* 行程時間軸 */
+        .timeline-item { display: flex; margin-bottom: 20px; position: relative; }
+        .time { min-width: 65px; font-size: 0.85rem; color: var(--primary-color); font-weight: 700; padding-top: 2px; }
+        .content { padding-left: 15px; border-left: 3px solid var(--primary-light); flex: 1; }
+        .content strong { display: block; font-size: 1.05rem; color: #333; margin-bottom: 3px; }
+        .content span { font-size: 0.9rem; color: #777; }
+        .highlight .content { border-left-color: var(--accent-color); }
+        .highlight .content strong { color: #E65100; }
+
+        /* 備忘錄 Box & Google Maps Links */
+        .info-box { background-color: #FFF9FA; border-radius: 15px; padding: 15px; margin-top: 25px; border: 1px solid var(--primary-light); font-size: 0.85rem; }
+        .info-box h4 { color: var(--primary-color); margin-bottom: 10px; font-size: 0.95rem; }
+        .info-box ul { list-style: none; padding: 0; }
+        .info-box li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; color: #555; }
+        
+        /* 超連結樣式 */
+        .map-link {
+            color: #D81B60; /* 深粉紅色 */
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-size: 24px;
-            z-index: 100;
+            gap: 4px;
+            transition: color 0.2s;
         }
+        .map-link:hover { color: var(--primary-color); text-decoration: underline; }
+
+        footer { text-align: center; font-size: 0.8rem; color: #bbb; margin-top: 30px; padding-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>富國島 Chill 歎之旅 🌴</h1>
-    <p>Happy Birthday to My Wife ❤️</p>
-    <p style="font-size: 0.8rem; margin-top: 5px;">Feb 28 - Mar 03, 2026</p>
-</header>
+<div id="landing-page">
+    <div class="decor decor-1">🌴</div>
+    <div class="decor decor-2">✈️</div>
 
-<div class="container">
+    <h1 class="landing-title">富國島慶生之旅 🎂</h1>
+    <div class="couple-name">Kevin 😘 Belle</div>
+    <div class="travel-dates">✈️ Feb 28 - Mar 03, 2026</div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 1 🛫 出發 & 南部美食</span>
-            <span class="day-date">Feb 28</span>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="time">07:00</div>
-            <div class="content">
-                <strong>機場 HKG / Intervals Bar 🍷</strong>
-                <span>Skybridge 9/F, Gate 13-22</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">10:10</div>
-            <div class="content">
-                <strong>HKG > PQC ✈️</strong>
-                <span>12:05 到達</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">13:30</div>
-            <div class="content">
-                <strong>入住 Premier Residences 🏨</strong>
-                <span>Check-in 放低行李</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">15:00</div>
-            <div class="content">
-                <strong>Tea Time @ French & Co 🍰</strong>
-                <span>JW Marriott 內的法式下午茶</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">16:30</div>
-            <div class="content">
-                <strong>Khem Beach 🏖️ / Hotel Pool 👙</strong>
-                <span>享受陽光海灘</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">19:30</div>
-            <div class="content">
-                <strong>出發去陽東市區 🚕</strong>
-                <span>先去 Department of Chemistry Bar 🥂</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">20:15</div>
-            <div class="content">
-                <strong>晚餐：Rak Rock Lobster 🦞</strong>
-                <span>大擦新鮮海鮮！</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">21:45+</div>
-            <div class="content">
-                <strong>Kingkong Mart + 陽東夜市 🥥</strong>
-                <span>買手信 & 體驗當地夜市</span>
-            </div>
-        </div>
-
-        <div class="info-box">
-            <h4>🕒 營業時間備忘</h4>
-            <ul>
-                <li><span>Intervals Bar</span> <span>07:00 - 23:30</span></li>
-                <li><span>French & Co</span> <span>08:00 - 21:00</span></li>
-                <li><span>Chemistry Bar</span> <span>16:00 - 23:30</span></li>
-                <li><span>Rak Rock Lobster</span> <span>10:00 - 22:00</span></li>
-                <li><span>陽東夜市</span> <span>17:00 - 23:30</span></li>
-            </ul>
+    <div class="countdown-container">
+        <div class="countdown-title">✨ 距離我們出發仲有 ✨</div>
+        <div class="countdown-timer" id="countdown">
+            <div class="time-box"><span id="days">00</span><small>Days</small></div>
+            <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
+            <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
         </div>
     </div>
 
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 2 🚠 Villa & 水上樂園</span>
-            <span class="day-date">Mar 01</span>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="time">09:00</div>
-            <div class="content">
-                <strong>Check-out 💨</strong>
-                <span>前往 Premier Village</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">09:30</div>
-            <div class="content">
-                <strong>轉酒店：Premier Village 🏩</strong>
-                <span>💡 記得 Book 定 Day 4 Spa!</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">10:00</div>
-            <div class="content">
-                <strong>Sun World 跨海纜車 🚠</strong>
-                <span>前往香島 (An Thoi Station)</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">10:30</div>
-            <div class="content">
-                <strong>Aquatopia 水上樂園 🛝</strong>
-                <span>盡情玩水 / 自由活動</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">15:00</div>
-            <div class="content">
-                <strong>Premier Village 拎房 🏩</strong>
-                <span>Villa 私人泳池 Chill Time 🦦</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">19:00</div>
-            <div class="content">
-                <strong>Swing Bar 🥂</strong>
-                <span>Happy Hour</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">20:00</div>
-            <div class="content">
-                <strong>晚餐：Jo's Cucina 🍝</strong>
-                <span>高質浪漫意大利菜</span>
+    <button class="start-btn" onclick="startJourney()">出發🎀</button>
+
+    <div class="prepared-by">Prepared by 老公仔 Kevin ❤️</div>
+</div>
+
+<div id="main-itinerary">
+    <header>
+        <h1>Kevin & Belle 的富國島之旅 🌴</h1>
+        <p>Happy Birthday to My Lovely Wife 🎂</p>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="showDay(1)">Day 1</button>
+        <button class="tab-btn" onclick="showDay(2)">Day 2</button>
+        <button class="tab-btn" onclick="showDay(3)">Day 3</button>
+        <button class="tab-btn" onclick="showDay(4)">Day 4</button>
+    </nav>
+
+    <div class="container">
+        <div id="day1" class="day-content active">
+            <div class="day-card">
+                <img src="https://images.unsplash.com/photo-1540202404-b7111422eef5?auto=format&fit=crop&w=800&q=80" alt="Phu Quoc Beach" class="hero-img">
+                <div class="card-body">
+                    <div class="day-header">
+                        <span class="day-title">🛫 Day 1：啟程與南部美食</span>
+                        <span class="day-subtitle">Feb 28 (Fri) | 準備好心情出發！</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">07:00</div>
+                        <div class="content"><strong>機場 HKG / Intervals Bar 🍷</strong><span>先飲杯嘢 Chill 吓 (Gate 13-22)</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">10:10</div>
+                        <div class="content"><strong>HKG > PQC ✈️</strong><span>12:05 到達富國島</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">13:30</div>
+                        <div class="content"><strong>入住 Premier Residences 🏨</strong><span>Check-in 放低行李</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">15:00</div>
+                        <div class="content"><strong>Tea Time @ French & Co 🍰</strong><span>JW Marriott 內歎靚靚法式下午茶</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">16:30</div>
+                        <div class="content"><strong>Khem Beach 🏖️ / Hotel Pool 👙</strong><span>換泳衣享受陽光海灘</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">19:30</div>
+                        <div class="content"><strong>出發陽東市區 🚕</strong><span>先去 Chemistry Bar 飲杯 Cocktail 🥂</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">20:15</div>
+                        <div class="content"><strong>晚餐：Rak Rock Lobster 🦞</strong><span>大擦當地新鮮海鮮大餐！</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">21:45+</div>
+                        <div class="content"><strong>掃街買手信 🥥</strong><span>Kingkong Mart + 陽東夜市</span></div>
+                    </div>
+                    <div class="info-box">
+                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Intervals+Bar+Hong+Kong+Airport" target="_blank" class="map-link">📍 Intervals Bar (HKG)</a><span>07:00 - 23:30</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=French+%26+Co+JW+Marriott+Phu+Quoc" target="_blank" class="map-link">📍 French & Co</a><span>08:00 - 21:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Department+of+Chemistry+Bar+JW+Marriott+Phu+Quoc" target="_blank" class="map-link">📍 Chemistry Bar</a><span>16:00 - 23:30</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Rak+Rock+Lobster+Phu+Quoc" target="_blank" class="map-link">📍 Rak Rock Lobster</a><span>10:00 - 22:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Kingkong+Mart+Phu+Quoc" target="_blank" class="map-link">📍 Kingkong Mart</a><span>08:00 - 22:30</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Phu+Quoc+Night+Market" target="_blank" class="map-link">📍 陽東夜市</a><span>17:00 - 23:30</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="info-box">
-            <h4>🕒 營業時間備忘</h4>
-            <ul>
-                <li><span>纜車運作</span> <span>09:00 - 17:00</span></li>
-                <li><span>(午休停駛)</span> <span>11:30 - 13:30</span></li>
-                <li><span>水上樂園</span> <span>10:00 - 16:30</span></li>
-                <li><span>Jo's Cucina</span> <span>16:00 - 22:00</span></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="day-card" style="border: 2px solid var(--primary-color);">
-        <div class="day-header">
-            <span class="day-title">Day 3 👑 老婆大壽</span>
-            <span class="day-date">Mar 02</span>
-        </div>
-        
-        <div style="text-align: center; margin-bottom: 20px;">
-            <span class="birthday-badge">🎂 Happy Birthday! 🎉</span>
-        </div>
-
-        <div class="timeline-item">
-            <div class="time">Morning</div>
-            <div class="content">
-                <strong>自然醒 & 酒店早餐 🍳</strong>
-                <span>Villa 瘋狂打卡 / 游水 📸</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">17:00</div>
-            <div class="content">
-                <strong>Sunset Town 日落小鎮 🌇</strong>
-                <span>逛逛 VuiFest Bazaar 海濱夜市</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">19:00</div>
-            <div class="content">
-                <strong>老婆生日飯 🍴🥂</strong>
-                <span>📍 RuNam (或 Sorrento)</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">21:00</div>
-            <div class="content">
-                <strong>Kiss of the Sea 大匯演 🎆</strong>
-                <span>震撼煙花結尾 (20:30 入場)</span>
+        <div id="day2" class="day-content">
+            <div class="day-card">
+                <img src="https://images.unsplash.com/photo-1582653291997-079a1c04e5d1?auto=format&fit=crop&w=800&q=80" alt="Resort Pool" class="hero-img">
+                <div class="card-body">
+                    <div class="day-header">
+                        <span class="day-title">🚠 Day 2：水上樂園與頂級 Villa</span>
+                        <span class="day-subtitle">Mar 01 (Sat) | 陽光、玩水、食好西</span>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">09:30</div>
+                        <div class="content"><strong>轉酒店：Premier Village 🏩</strong><span>超靚 Villa！(記得 Book 定 Day 4 Spa)</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">10:00</div>
+                        <div class="content"><strong>Sun World 跨海纜車 🚠</strong><span>無敵海景入香島</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">10:30</div>
+                        <div class="content"><strong>Aquatopia 水上樂園 🛝</strong><span>盡情玩水！</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">15:00</div>
+                        <div class="content"><strong>Premier Village 拎房 🦦</strong><span>返 Villa 私人泳池 Chill Time</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">19:00</div>
+                        <div class="content"><strong>Swing Bar 🥂</strong><span>飲杯嘢睇日落</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">20:00</div>
+                        <div class="content"><strong>晚餐：Jo's Cucina 🍝</strong><span>浪漫高質意大利菜</span></div>
+                    </div>
+                    <div class="info-box">
+                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Sun+World+Hon+Thom+Nature+Park+Cable+Car+Station" target="_blank" class="map-link">📍 Sun World 跨海纜車</a><span>09:30 - 11:30; 13:30 - 17:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Aquatopia+Water+Park+Phu+Quoc" target="_blank" class="map-link">📍 水上樂園 (Aquatopia)</a><span>10:00 - 16:30</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Jo's+Cucina+Phu+Quoc" target="_blank" class="map-link">📍 Jo's Cucina</a><span>16:00 - 22:00</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="info-box">
-            <h4>🕒 營業時間備忘</h4>
-            <ul>
-                <li><span>日落小鎮夜市</span> <span>16:00 - 24:00</span></li>
-                <li><span>RuNam / Sorrento</span> <span>至 22:00</span></li>
-                <li><span>Kiss of the Sea</span> <span>21:00 開騷</span></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="day-card">
-        <div class="day-header">
-            <span class="day-title">Day 4 💆‍♀️ 貴婦 Spa & 回程</span>
-            <span class="day-date">Mar 03</span>
-        </div>
-        
-        <div class="timeline-item">
-            <div class="time">12:00</div>
-            <div class="content">
-                <strong>Check-out 🛎️</strong>
-                <span>行李寄放酒店 Concierge</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">12:15</div>
-            <div class="content">
-                <strong>酒店 Farewell Lunch 🍽️</strong>
-                <span>對住海景食好西</span>
-            </div>
-        </div>
-        <div class="timeline-item highlight-event">
-            <div class="time">14:15</div>
-            <div class="content">
-                <strong>Plumeria Spa 💆‍♀️💆‍♂️</strong>
-                <span>雙人按摩 (約 2 小時)</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">16:30</div>
-            <div class="content">
-                <strong>出發去機場 🚕</strong>
-                <span>由 Premier Village 出發</span>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="time">18:55</div>
-            <div class="content">
-                <strong>PQC > HKG ✈️</strong>
-                <span>帶著滿滿回憶返香港 🏠</span>
+        <div id="day3" class="day-content">
+            <div class="day-card" style="border: 2px solid var(--primary-color);">
+                <img src="https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=800&q=80" alt="Fireworks" class="hero-img">
+                <div class="card-body">
+                    <div class="day-header">
+                        <span class="day-title">👑 Day 3：老婆大壽正日</span>
+                        <span class="day-subtitle">Mar 02 (Sun) | Happy Birthday! 🎉</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">Morning</div>
+                        <div class="content"><strong>自然醒 & 酒店早餐 🍳</strong><span>全日為你度身訂造，Villa 瘋狂打卡 📸</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">17:00</div>
+                        <div class="content"><strong>Sunset Town 日落小鎮 🌇</strong><span>逛逛 VuiFest Bazaar 海濱夜市</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">19:00</div>
+                        <div class="content"><strong>老婆生日飯 🍴🥂</strong><span>📍 RuNam (或 Sorrento) 準備咗驚喜！</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">21:00</div>
+                        <div class="content"><strong>Kiss of the Sea 大匯演 🎆</strong><span>超浪漫震撼煙花結尾 (20:30 入場)</span></div>
+                    </div>
+                    <div class="info-box">
+                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Sunset+Town+Phu+Quoc" target="_blank" class="map-link">📍 日落小鎮 (Sunset Town)</a><span>全日開放</span></li>
+                            <li><a href="https://maps.app.goo.gl/snAPWmXxbszdCjmc7" target="_blank" class="map-link">📍 VuiFest Bazaar 海濱夜市</a><span>16:00 - 24:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=RuNam+Phu+Quoc+Sunset+Town" target="_blank" class="map-link">📍 RuNam 餐廳</a><span>07:00 - 22:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Kiss+of+the+Sea+Show+Phu+Quoc" target="_blank" class="map-link">📍 Kiss of the Sea 大匯演</a><span>21:00 開騷</span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="info-box">
-            <h4>🕒 營業時間備忘</h4>
-            <ul>
-                <li><span>Plumeria Spa</span> <span>10:00 - 20:00</span></li>
-            </ul>
+        <div id="day4" class="day-content">
+            <div class="day-card">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Spa Massage" class="hero-img">
+                <div class="card-body">
+                    <div class="day-header">
+                        <span class="day-title">💆‍♀️ Day 4：貴婦 Spa 與回程</span>
+                        <span class="day-subtitle">Mar 03 (Mon) | 充充電，準備回家</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">12:00</div>
+                        <div class="content"><strong>Check-out 🛎️</strong><span>行李寄放酒店 Concierge</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">12:15</div>
+                        <div class="content"><strong>酒店 Farewell Lunch 🍽️</strong><span>對住海景食好西</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">14:15</div>
+                        <div class="content"><strong>Plumeria Spa 💆‍♀️💆‍♂️</strong><span>雙人按摩 (約 2 小時)，洗走疲勞！</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">16:30</div>
+                        <div class="content"><strong>出發去機場 🚕</strong><span>由 Premier Village 出發</span></div>
+                    </div>
+                    <div class="timeline-item highlight">
+                        <div class="time">18:55</div>
+                        <div class="content"><strong>PQC > HKG ✈️</strong><span>滿載開心回憶返香港 🏠 (23:05到達)</span></div>
+                    </div>
+                    <div class="info-box">
+                        <h4>🕒 營業時間 & Map 捷徑 (撳字開地圖)</h4>
+                        <ul>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Plumeria+Spa+Premier+Village+Phu+Quoc" target="_blank" class="map-link">📍 Plumeria Spa</a><span>10:00 - 20:00</span></li>
+                            <li><a href="https://www.google.com/maps/search/?api=1&query=Phu+Quoc+International+Airport" target="_blank" class="map-link">📍 富國島機場 (PQC)</a><span>準備登機</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <footer>
         <p>Created with ❤️ for 老婆喵</p>
-        <p>2026 Phu Quoc Trip</p>
+        <p>Phu Quoc Birthday Trip 2026</p>
     </footer>
-
 </div>
 
-<div class="fab">✈️</div>
+<script>
+    // 進入行程按鈕功能
+    function startJourney() {
+        // 隱藏第一頁，顯示行程頁面
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('main-itinerary').style.display = 'block';
+        
+        // 確保畫面回到最頂
+        window.scrollTo(0, 0);
+    }
+
+    // Tab 切換功能
+    function showDay(dayNumber) {
+        document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById('day' + dayNumber).classList.add('active');
+        document.querySelectorAll('.tab-btn')[dayNumber-1].classList.add('active');
+    }
+
+    // 倒數計時器功能 (目標：2026年2月28日 早上 07:00)
+    const countDownDate = new Date("Feb 28, 2026 07:00:00").getTime();
+
+    const x = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "<h2 style='color:#D81B60;'>🎉 我哋出發啦！✈️</h2>";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days < 10 ? '0'+days : days;
+        document.getElementById("hours").innerHTML = hours < 10 ? '0'+hours : hours;
+        document.getElementById("mins").innerHTML = minutes < 10 ? '0'+minutes : minutes;
+        document.getElementById("secs").innerHTML = seconds < 10 ? '0'+seconds : seconds;
+    }, 1000);
+</script>
 
 </body>
 </html>
